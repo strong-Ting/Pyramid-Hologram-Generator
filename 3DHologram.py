@@ -43,7 +43,7 @@ def process_video(video):
     cap = cv2.VideoCapture(video)
 
     # Define the codec and create VideoWriter object
-    fourcc = cv2.cv.CV_FOURCC(*'XVID')
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
     holo = None
     ret = False
     while(not ret):
@@ -52,7 +52,7 @@ def process_video(video):
             frame = cv2.resize(frame, (640, 640), interpolation = cv2.INTER_CUBIC)
             holo = makeHologram(frame)
     out = cv2.VideoWriter('hologram.avi',fourcc, 30.0, (holo.shape[0],holo.shape[1]))
-    total_frames = cap.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)
+    total_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     count = 0
     print "Processing %d frames"%(total_frames)
     while(True):
@@ -99,5 +99,5 @@ def rotate_bound(image, angle):
 if __name__ == '__main__' :
     orig = cv2.imread(sys.argv[1])
     holo = makeHologram(orig,scale=1.0)
-    process_video("/home/evan/Videos/test.avi")
-    #cv2.imwrite("hologram.png",holo)
+    process_video("I:\\3d hologram\\python\\Pyramid-Hologram-Generator\\tenor.gif")
+    cv2.imwrite("hologram0.png",holo)
